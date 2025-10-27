@@ -319,3 +319,21 @@
     animation: float 6s ease-in-out infinite;
   }
 }
+/* 🌌 تأثير التوهج عند تمرير الماوس */
+a:hover,
+button:hover {
+  text-shadow: 0 0 8px rgba(0, 255, 255, 0.6),
+               0 0 16px rgba(0, 128, 255, 0.4);
+  transition: all 0.3s ease;
+}
+
+/* 🔹 الزر النشط */
+.active-link {
+  color: #00eaff;
+  text-shadow: 0 0 12px rgba(0, 255, 255, 0.8);
+}
+
+/* 🔄 تمرير ناعم */
+html {
+  scroll-behavior: smooth;
+}
