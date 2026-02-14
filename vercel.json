@@ -6,8 +6,13 @@
   "framework": null,
   "rewrites": [
     {
-      "source": "/(.*)",
+      "source": "/((?!api/.*).*)",
       "destination": "/index.html"
     }
-  ]
+  ],
+  "functions": {
+    "api/download-cv.ts": {
+      "includeFiles": "CV/**"
+    }
+  }
 }
