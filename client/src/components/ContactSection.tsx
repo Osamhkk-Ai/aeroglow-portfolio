@@ -34,7 +34,7 @@ export default function ContactSection() {
           <p className="text-lg text-foreground/70 mb-8">
             Have a project in mind? Let's work together to build something amazing.
           </p>
-          
+
           {/* Social Links & CV Download */}
           <div className="flex flex-wrap items-center justify-center gap-4 mb-8">
             <Button
@@ -55,51 +55,15 @@ export default function ContactSection() {
               <Linkedin className="w-5 h-5 mr-2" />
               LinkedIn
             </Button>
-			<Button
-				variant="outline"
-				size="lg"
-				onClick={() =>
-					window.open(
-						'https://github.com/Osamhkk-Ai',
-						'_blank',
-						'noopener,noreferrer'
-					)
-				}
-				className="glass border-primary/30 hover:border-primary"
-			>
-				<Github className="w-5 h-5 mr-2" />
-				GitHub
-			</Button>
 
-			<Button
-				variant="outline"
-				size="lg"
-				onClick={() =>
-					window.open(
-						'https://www.linkedin.com/in/osama-alghamdi-4aa902302',
-						'_blank',
-						'noopener,noreferrer'
-					)
-				}
-				className="glass border-primary/30 hover:border-primary"
-			>
-				<Linkedin className="w-5 h-5 mr-2" />
-				LinkedIn
-			</Button>
             <Button
-              asChild
               variant="outline"
               size="lg"
+              onClick={() => window.open('/api/download-cv', '_blank')}
               className="glass border-primary/30 hover:border-primary glow-sm"
             >
-              <a
-                href="/CV/OSAMA-ALGHAMDI-2026-FEB.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Download className="w-5 h-5 mr-2" />
-                Download CV
-              </a>
+              <Download className="w-5 h-5 mr-2" />
+              Download CV
             </Button>
           </div>
         </div>
