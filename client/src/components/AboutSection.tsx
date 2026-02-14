@@ -20,7 +20,7 @@ export default function AboutSection() {
             <div className="lg:col-span-1 flex justify-center">
               <div className="w-64 h-64 rounded-2xl glass flex items-center justify-center overflow-hidden group hover-elevate transition-all duration-300">
                 <img 
-                  src="/image.png" 
+                  src="/image_v2.png" 
                   alt="Profile" 
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                 />
