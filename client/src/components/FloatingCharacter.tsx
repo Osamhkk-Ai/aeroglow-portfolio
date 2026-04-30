@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import Lottie from 'lottie-react';
+
+import { OWNER } from '@info/portfolio_and_socials';
 
 export default function FloatingCharacter() {
   return (
@@ -12,8 +12,7 @@ export default function FloatingCharacter() {
       }}
     >
       <img
-        src="/رائد الفضاء على صاروخ مضيء.png"
- // 🛰️ غيّر المسار إذا الصورة في مكان مختلف
+        src={OWNER.rocketImage}
         alt="Flying Rocket"
         style={{
           width: '100%',

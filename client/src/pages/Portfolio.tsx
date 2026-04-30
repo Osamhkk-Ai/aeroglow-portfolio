@@ -2,15 +2,17 @@ import StarField from '@/components/StarField';
 import ThemeToggle from '@/components/ThemeToggle';
 import MouseGlow from '@/components/MouseGlow';
 import FloatingCharacter from '@/components/FloatingCharacter';
-import HomeHero from '@/components/HomeHero';
-import AboutSection from '@/components/AboutSection';
-import ExperienceSection from '@/components/ExperienceSection';
-import ProjectsSection from '@/components/ProjectsSection';
-import AchievementsSection from '@/components/AchievementsSection';
-import CertificationsSection from '@/components/CertificationsSection';
-import SkillsSection from '@/components/SkillsSection';
-import ContactSection from '@/components/ContactSection';
-import GlassNav from '@/components/ui/navigation-menu';
+import HomeHero from '@/components/sections/HomeHero';
+import AboutSection from '@/components/sections/AboutSection';
+import ExperienceSection from '@/components/sections/ExperienceSection';
+import ProjectsSection from '@/components/sections/ProjectsSection';
+import LiveProjectsSection from '@/components/sections/LiveProjectsSection';
+import AchievementsSection from '@/components/sections/AchievementsSection';
+import CertificationsSection from '@/components/sections/CertificationsSection';
+import SkillsSection from '@/components/sections/SkillsSection';
+import ContactSection from '@/components/sections/ContactSection';
+import Nav from '@/components/layout/Nav';
+import { OWNER } from '@info/portfolio_and_socials';
 
 export default function Portfolio() {
   return (
@@ -20,7 +22,7 @@ export default function Portfolio() {
       <FloatingCharacter />
       <MouseGlow />
       <ThemeToggle />
-      <GlassNav />
+      <Nav />
 
       {/* Main Content */}
       <div className="relative z-10">
@@ -28,6 +30,7 @@ export default function Portfolio() {
         <AboutSection />
         <ExperienceSection />
         <ProjectsSection />
+        <LiveProjectsSection />
         <AchievementsSection />
         <CertificationsSection />
         <SkillsSection />
@@ -35,7 +38,7 @@ export default function Portfolio() {
 
         {/* Footer */}
         <footer className="py-8 px-6 text-center text-foreground/60 border-t border-border/30 relative z-20">
-          <p>© 2025 Osama Alghamdi. Built with passion and AI.</p>
+          <p>© {OWNER.copyrightYear} {OWNER.name}. Built with passion and AI.</p>
         </footer>
       </div>
     </div>

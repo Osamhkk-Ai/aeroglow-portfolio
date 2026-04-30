@@ -3,7 +3,8 @@
     "client/src/**/*",
     "shared/**/*",
     "server/**/*",
-    "api/**/*"
+    "api/**/*",
+    "0_UPDATE_INFO_HERE/**/*"
   ],
   "exclude": [
     "node_modules",
@@ -38,6 +39,9 @@
       ],
       "@shared/*": [
         "./shared/*"
+      ],
+      "@info/*": [
+        "./0_UPDATE_INFO_HERE/*"
       ]
     }
   }

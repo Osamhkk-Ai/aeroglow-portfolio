@@ -18,7 +18,7 @@ export default function handler(req: IncomingMessage, res: ServerResponse) {
         return;
     }
 
-    const cvDir = path.join(process.cwd(), 'CV');
+    const cvDir = path.join(process.cwd(), '0_UPDATE_INFO_HERE');
 
     try {
         if (!fs.existsSync(cvDir)) {

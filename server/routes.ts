@@ -1,6 +1,6 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
-import { storage } from "./storage";
+
 import path from "path";
 import fs from "fs";
 
@@ -11,16 +11,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // use storage to perform CRUD operations on the storage interface
   // e.g. storage.insertUser(user) or storage.getUserByUsername(username)
 
-  // CV Download endpoint - يقرأ أي ملف من مجلد CV
+  // CV Download endpoint - يقرأ أي ملف من مجلد 0_UPDATE_INFO_HERE
   app.get("/api/download-cv", (req, res) => {
-    const cvDir = path.join(process.cwd(), "CV");
+    const cvDir = path.join(process.cwd(), "0_UPDATE_INFO_HERE");
     
     try {
       // قراءة جميع الملفات في المجلد
       const files = fs.readdirSync(cvDir);
       
       if (files.length === 0) {
-        return res.status(404).send("No CV file found in the CV directory");
+        return res.status(404).send("No CV file found in the directory");
       }
       
       // أخذ أول ملف في المجلد (يمكنك تعديل هذا للبحث عن امتداد معين)
