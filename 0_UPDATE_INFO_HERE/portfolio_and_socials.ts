@@ -23,6 +23,7 @@ export const OWNER = {
     'Exploring how intelligence can be created, aligned, and deployed to make life smarter. I build AI solutions that bridge cutting-edge technology with real-world impact—from preserving cultural heritage to enhancing accessibility.',
 
   /** Social & contact */
+  email: 'osamh.wk@gmail.com',
   github: 'https://github.com/Osamhkk-Ai',
   linkedin: 'https://www.linkedin.com/in/osama-alghamdi-4aa902302',
   twitter: 'https://x.com',
@@ -35,10 +36,10 @@ export const OWNER = {
   cvDownloadUrl: '/api/download-cv',
 
   /** Profile photo — used in AboutSection */
-  profileImage: '/assets/image_v2.png',
+  profileImage: '/assets/image_v2.webp',
 
   /** Floating rocket image in background */
-  rocketImage: '/rocket-astronaut.png',
+  rocketImage: '/rocket-astronaut.webp',
 
   /** Copyright year — ideally rendered dynamically but stored here as baseline */
   copyrightYear: new Date().getFullYear(),

@@ -69,12 +69,4 @@ export const LIVE_PROJECTS: LiveProject[] = [
     technologies: ['Generative AI', 'Computer Vision', 'LangChain', 'React'],
     status: 'coming-soon',
   },
-  {
-    title: 'FootballIQ',
-    tagline: 'Real-time football analytics and AI prediction engine.',
-    description:
-      'Production sports analytics platform built on real match data. Delivers live insights, performance forecasts, and tactical recommendations using ML models trained on professional league datasets.',
-    technologies: ['ML Models', 'Real-time Data', 'Python', 'Dashboard'],
-    status: 'under-development',
-  },
 ];

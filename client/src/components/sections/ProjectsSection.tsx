@@ -27,6 +27,10 @@ export default function ProjectsSection() {
               technologies={project.technologies}
               link={project.link}
               image={project.image}
+              video={project.video}
+              videoSpeed={project.videoSpeed}
+              videoPosition={project.videoPosition}
+              highlights={project.highlights}
               featured={true}
             />
           ))}

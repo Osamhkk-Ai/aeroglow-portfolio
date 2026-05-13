@@ -1,139 +1,106 @@
-import { Mail, Send, Github, Linkedin, Download } from 'lucide-react';
+import { Mail, Github, Linkedin, Download, Copy, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
 import { useState } from 'react';
 import { OWNER } from '@info/portfolio_and_socials';
 
 export default function ContactSection() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
-  });
+  const [copied, setCopied] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log('Form submitted:', formData);
-    setFormData({ name: '', email: '', message: '' });
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(OWNER.email);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1800);
+    } catch {
+      /* clipboard not available — ignore */
+    }
   };
 
   return (
     <section id="contact" className="py-24 px-6 relative">
-      <div className="max-w-3xl mx-auto relative z-20">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">
-            Get in <span className="text-primary text-glow">Touch</span>
-          </h2>
-          <p className="text-lg text-foreground/70 mb-8">
-            Have a project in mind? Let's work together to build something amazing.
-          </p>
+      <div className="max-w-2xl mx-auto relative z-20 text-center">
+        <h2 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">
+          Get in <span className="text-primary text-glow">Touch</span>
+        </h2>
+        <p className="text-base text-foreground/70 mb-10">
+          Have a project in mind? Drop me an email.
+        </p>
 
-          {/* Social Links & CV Download */}
-          <div className="flex flex-wrap items-center justify-center gap-4 mb-8">
-            <Button
-              variant="outline"
-              size="lg"
-              onClick={() => window.open(OWNER.github, '_blank', 'noopener,noreferrer')}
-              className="glass border-primary/30 hover:border-primary"
+        {/* Email card */}
+        <div className="glass-strong rounded-2xl p-6 mb-8 flex items-center justify-between gap-4">
+          <div className="flex items-center gap-3 min-w-0">
+            <div className="w-10 h-10 rounded-xl glass flex items-center justify-center flex-shrink-0">
+              <Mail className="w-5 h-5 text-primary" />
+            </div>
+            <a
+              href={`mailto:${OWNER.email}`}
+              className="text-base sm:text-lg font-medium text-foreground hover:text-primary transition-colors truncate"
+              data-testid="link-email"
             >
-              <Github className="w-5 h-5 mr-2" />
-              GitHub
-            </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              onClick={() => window.open(OWNER.linkedin, '_blank', 'noopener,noreferrer')}
-              className="glass border-primary/30 hover:border-primary"
-            >
-              <Linkedin className="w-5 h-5 mr-2" />
-              LinkedIn
-            </Button>
-
-            <Button
-              variant="outline"
-              size="lg"
-              onClick={() => window.open(OWNER.cvDownloadUrl, '_blank')}
-              className="glass border-primary/30 hover:border-primary glow-sm"
-            >
-              <Download className="w-5 h-5 mr-2" />
-              Download CV
-            </Button>
+              {OWNER.email}
+            </a>
           </div>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={handleCopy}
+            className="glass border-primary/30 hover:border-primary flex-shrink-0"
+            data-testid="button-copy-email"
+          >
+            {copied ? (
+              <>
+                <Check className="w-4 h-4 mr-2" />
+                Copied
+              </>
+            ) : (
+              <>
+                <Copy className="w-4 h-4 mr-2" />
+                Copy
+              </>
+            )}
+          </Button>
         </div>
 
-        <div className="glass-strong p-8 lg:p-12 rounded-3xl">
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div>
-              <label htmlFor="name" className="block text-sm font-medium mb-2">
-                Name
-              </label>
-              <Input
-                id="name"
-                name="name"
-                type="text"
-                value={formData.name}
-                onChange={handleChange}
-                placeholder="Your name"
-                required
-                className="glass border-primary/30 focus:border-primary focus:ring-2 focus:ring-primary/20"
-                data-testid="input-name"
-              />
-            </div>
+        {/* Primary CTA */}
+        <Button
+          size="lg"
+          onClick={() => (window.location.href = `mailto:${OWNER.email}`)}
+          className="glow text-base px-8 py-6 mb-8"
+          data-testid="button-send-email"
+        >
+          <Mail className="w-5 h-5 mr-2" />
+          Send Me an Email
+        </Button>
 
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium mb-2">
-                Email
-              </label>
-              <div className="relative">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-foreground/50" />
-                <Input
-                  id="email"
-                  name="email"
-                  type="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  placeholder="your.email@example.com"
-                  required
-                  className="pl-10 glass border-primary/30 focus:border-primary focus:ring-2 focus:ring-primary/20"
-                  data-testid="input-email"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label htmlFor="message" className="block text-sm font-medium mb-2">
-                Message
-              </label>
-              <Textarea
-                id="message"
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                placeholder="Tell me about your project..."
-                required
-                rows={6}
-                className="glass border-primary/30 focus:border-primary focus:ring-2 focus:ring-primary/20 resize-none"
-                data-testid="input-message"
-              />
-            </div>
-
-            <Button
-              type="submit"
-              className="w-full glow text-base py-6"
-              data-testid="button-send-message"
-            >
-              Send Message
-              <Send className="w-4 h-4 ml-2" />
-            </Button>
-          </form>
+        {/* Social Links & CV */}
+        <div className="flex flex-wrap items-center justify-center gap-3">
+          <Button
+            variant="outline"
+            size="lg"
+            onClick={() => window.open(OWNER.github, '_blank', 'noopener,noreferrer')}
+            className="glass border-primary/30 hover:border-primary"
+          >
+            <Github className="w-5 h-5 mr-2" />
+            GitHub
+          </Button>
+          <Button
+            variant="outline"
+            size="lg"
+            onClick={() => window.open(OWNER.linkedin, '_blank', 'noopener,noreferrer')}
+            className="glass border-primary/30 hover:border-primary"
+          >
+            <Linkedin className="w-5 h-5 mr-2" />
+            LinkedIn
+          </Button>
+          <Button
+            variant="outline"
+            size="lg"
+            onClick={() => window.open(OWNER.cvDownloadUrl, '_blank')}
+            className="glass border-primary/30 hover:border-primary glow-sm"
+          >
+            <Download className="w-5 h-5 mr-2" />
+            Download CV
+          </Button>
         </div>
       </div>
     </section>

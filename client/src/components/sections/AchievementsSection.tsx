@@ -15,16 +15,20 @@ export default function AchievementsSection() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {ACHIEVEMENTS.map((item, index) => (
-            <ProjectCard
-              key={index}
-              title={item.title}
-              description={item.description}
-              image={item.image}
-            // No link provided to hide the button
-            // No technologies provided
-            />
-          ))}
+          {ACHIEVEMENTS.map((item, index) => {
+            const isLastOrphan =
+              index === ACHIEVEMENTS.length - 1 && ACHIEVEMENTS.length % 3 === 1;
+            return (
+              <div key={index} className={isLastOrphan ? 'lg:col-start-2' : ''}>
+                <ProjectCard
+                  title={item.title}
+                  description={item.description}
+                  highlights={item.highlights}
+                  image={item.image}
+                />
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

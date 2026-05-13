@@ -14,6 +14,8 @@ export default function FloatingCharacter() {
       <img
         src={OWNER.rocketImage}
         alt="Flying Rocket"
+        loading="lazy"
+        decoding="async"
         style={{
           width: '100%',
           height: '100%',

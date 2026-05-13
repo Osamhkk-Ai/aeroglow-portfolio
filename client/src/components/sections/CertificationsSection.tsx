@@ -24,7 +24,7 @@ export default function CertificationsSection() {
                 {/* Organization Logo */}
                 <div className="flex-shrink-0">
                   <div className="w-16 h-16 rounded-xl glass flex items-center justify-center text-3xl group-hover:scale-110 transition-transform duration-300 overflow-hidden">
-                    <img src={item.image} alt={item.title} className="w-full h-full object-contain p-2" />
+                    <img src={item.image} alt={item.title} loading="lazy" decoding="async" className="w-full h-full object-contain p-2" />
                   </div>
                 </div>
 

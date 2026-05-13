@@ -20,43 +20,43 @@ export const CERTIFICATIONS: Certification[] = [
   {
     title: 'CompTIA Data+',
     organization: 'CompTIA',
-    image: '/assets/comptia.png',
+    image: '/assets/comptia.webp',
   },
   {
     title: 'SDA × Le Wagon — Top 10 Performer',
     organization: 'Saudi Digital Academy',
-    image: '/assets/SDA.png',
+    image: '/assets/SDA.webp',
   },
   {
     title: 'Junior Data Scientist',
     organization: 'INE',
-    image: '/assets/ine.png',
+    image: '/assets/ine.webp',
   },
   {
     title: 'Deep Learning Nanodegree',
     organization: 'Udacity',
-    image: '/assets/UD.png',
+    image: '/assets/UD.webp',
   },
   {
     title: 'Generative AI Nanodegree',
     organization: 'Udacity',
-    image: '/assets/UD.png',
+    image: '/assets/UD.webp',
     inProgress: true,
   },
   {
     title: 'Data Analysis Nanodegree',
     organization: 'Udacity',
-    image: '/assets/UD.png',
+    image: '/assets/UD.webp',
     inProgress: true,
   },
   {
     title: 'KAUST AI Enrichment Program',
     organization: 'KAUST',
-    image: '/assets/kaust.png',
+    image: '/assets/kaust.webp',
   },
   {
     title: 'Power BI Skills Track',
     organization: 'DataCamp',
-    image: '/assets/datacamp.png',
+    image: '/assets/datacamp.webp',
   },
 ];

@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import { ExternalLink, Image as ImageIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -7,6 +8,10 @@ interface ProjectCardProps {
   technologies?: string[];
   link?: string;
   image?: string;
+  video?: string;
+  videoSpeed?: number;
+  videoPosition?: 'top' | 'center' | 'bottom';
+  highlights?: string[];
   hideImage?: boolean;
   featured?: boolean;
 }
@@ -17,36 +22,96 @@ export default function ProjectCard({
   technologies,
   link,
   image,
+  video,
+  videoSpeed = 1,
+  videoPosition = 'center',
+  highlights,
   hideImage = false,
   featured = false
 }: ProjectCardProps) {
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  const handleMouseEnter = () => {
+    if (videoRef.current) {
+      videoRef.current.currentTime = 0;
+      videoRef.current.playbackRate = videoSpeed;
+      videoRef.current.play().catch(() => {});
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (videoRef.current) {
+      videoRef.current.pause();
+    }
+  };
+
   if (featured && image) {
     // Featured project card with premium hover effect
     return (
-      <div className="relative rounded-2xl overflow-hidden group h-full flex flex-col glass-strong hover-elevate transition-all duration-300">
-        {/* Image Container */}
+      <div
+        className="relative rounded-2xl overflow-hidden group h-full flex flex-col glass-strong transition-all duration-500 ease-out hover:scale-[1.5] hover:z-50 hover:shadow-2xl hover:shadow-primary/30 origin-center"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
+        {/* Image / Video Container */}
         <div className="relative w-full h-64 overflow-hidden">
           <img
             src={image}
             alt={title}
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            loading="lazy"
+            decoding="async"
+            className={`w-full h-full object-cover transition-opacity duration-500 ${
+              video ? 'group-hover:opacity-0' : ''
+            }`}
           />
 
+          {video && (
+            <video
+              ref={videoRef}
+              src={video}
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              className={`absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100 ${
+                videoPosition === 'top'
+                  ? 'object-top'
+                  : videoPosition === 'bottom'
+                  ? 'object-bottom'
+                  : 'object-center'
+              }`}
+            />
+          )}
+
           {/* Overlay that appears on hover */}
-          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/35 transition-all duration-500" />
+          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-500" />
         </div>
 
         {/* Content section - Always visible */}
-        <div className="p-6 flex flex-col flex-grow bg-background/95 backdrop-blur-sm">
-          <h3 className="text-2xl font-bold mb-3 text-glow group-hover:text-primary transition-colors">{title}</h3>
-          <p className="text-foreground/70 mb-4 leading-relaxed line-clamp-3">{description}</p>
+        <div className="p-5 flex flex-col flex-grow bg-background/95 backdrop-blur-sm">
+          <h3 className="text-xl font-bold mb-2 text-glow group-hover:text-primary transition-colors">{title}</h3>
+          <p className="text-sm text-foreground/70 mb-3 leading-relaxed line-clamp-3">{description}</p>
+
+          {highlights && highlights.length > 0 && (
+            <ul className="mb-3 space-y-1">
+              {highlights.map((item) => (
+                <li
+                  key={item}
+                  className="text-xs text-foreground/80 flex items-start gap-2 leading-relaxed"
+                >
+                  <span className="text-primary mt-0.5 leading-none">•</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          )}
 
           {technologies && technologies.length > 0 && (
-            <div className="flex flex-wrap gap-2 mb-4">
+            <div className="flex flex-wrap gap-1.5 mb-3">
               {technologies.map((tech) => (
                 <span
                   key={tech}
-                  className="px-3 py-1 text-xs font-medium glass rounded-full"
+                  className="px-2.5 py-0.5 text-[10px] font-medium glass rounded-full"
                   data-testid={`badge-tech-${tech.toLowerCase()}`}
                 >
                   {tech}
@@ -74,9 +139,9 @@ export default function ProjectCard({
   return (
     <div className="glass-strong rounded-2xl hover-elevate transition-all duration-300 group h-full flex flex-col overflow-hidden">
       {!hideImage && (
-        <div className="w-full h-48 bg-gradient-to-br from-primary/20 to-cyan-500/20 flex items-center justify-center overflow-hidden">
+        <div className="w-full h-72 bg-gradient-to-br from-primary/20 to-cyan-500/20 flex items-center justify-center overflow-hidden">
           {image ? (
-            <img src={image} alt={title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+            <img src={image} alt={title} loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
           ) : (
             <ImageIcon className="w-16 h-16 text-primary/40 group-hover:scale-110 transition-transform duration-300" />
           )}
@@ -84,16 +149,30 @@ export default function ProjectCard({
       )}
 
       {/* Content */}
-      <div className="p-8 flex flex-col flex-grow">
-        <h3 className="text-2xl font-bold mb-3 text-glow">{title}</h3>
-        <p className="text-foreground/70 mb-6 leading-relaxed flex-grow">{description}</p>
+      <div className="p-5 flex flex-col flex-grow">
+        <h3 className="text-lg font-bold mb-2 text-glow">{title}</h3>
+        <p className="text-xs text-foreground/70 mb-3 leading-relaxed">{description}</p>
+
+        {highlights && highlights.length > 0 && (
+          <ul className="mb-3 space-y-1">
+            {highlights.map((item) => (
+              <li
+                key={item}
+                className="text-xs text-foreground/80 flex items-start gap-2 leading-relaxed"
+              >
+                <span className="text-primary mt-0.5 leading-none">•</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        )}
 
         {technologies && technologies.length > 0 && (
-          <div className="flex flex-wrap gap-2 mb-6">
+          <div className="flex flex-wrap gap-1.5 mb-4">
             {technologies.map((tech) => (
               <span
                 key={tech}
-                className="px-3 py-1 text-xs font-medium glass rounded-full"
+                className="px-2.5 py-0.5 text-[10px] font-medium glass rounded-full"
                 data-testid={`badge-tech-${tech.toLowerCase()}`}
               >
                 {tech}

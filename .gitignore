@@ -4,3 +4,6 @@ dist
 server/public
 vite.config.ts.*
 *.tar.gz
+
+# Local asset backup (28MB) — original PNG/JPG/MP4 before WebP/video compression
+_backup_assets/
