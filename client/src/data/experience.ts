@@ -21,9 +21,19 @@ export interface ExperienceEntry {
 export const EXPERIENCE: ExperienceEntry[] = [
   {
     title: 'AI Specialist',
+    company: 'Emdad Solutions',
+    department: 'Confidential Government Project',
+    period: 'Aug 2026 – Present',
+    location: 'Riyadh',
+    description:
+      'Contributing to confidential government AI initiatives in collaboration with Emdad Solutions.',
+    image: '/experience-emdad.png',
+  },
+  {
+    title: 'AI Specialist',
     company: 'Saudi Food and Drug Authority',
     department: 'AI Division',
-    period: '2025 – Present',
+    period: '2025 – Aug 2026',
     location: 'Riyadh',
     description:
       'Designing and deploying AI solutions that automate field operations and strengthen regulatory compliance across pharmaceuticals and food products.',

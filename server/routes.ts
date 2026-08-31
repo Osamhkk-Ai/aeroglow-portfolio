@@ -23,8 +23,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(404).send("No CV file found in the directory");
       }
       
-      // أخذ أول ملف في المجلد (يمكنك تعديل هذا للبحث عن امتداد معين)
-      const cvFileName = files[0];
+      // Select the CV itself and ignore helper files such as README.txt.
+      const cvFileName = files.find((file) => file.toLowerCase().endsWith(".pdf"));
+
+      if (!cvFileName) {
+        return res.status(404).send("No PDF CV file found in the directory");
+      }
       const cvPath = path.join(cvDir, cvFileName);
       
       // تحديد اسم التحميل بناءً على نوع الملف
